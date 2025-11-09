@@ -23,6 +23,12 @@ ros2 run image_view disparity_view --ros-args --remap /image:=/stereo/disparity
 
 View point cloud in rviz2, add topic /stereo/points2 and change global frame to camera_frame
 
+
+Static transform to reorientate from camera frame coords to ROS2 coords:
+```
+ros2 run tf2_ros static_transform_publisher 0.0 0.0 0.0 -1.57 0.0 -1.57 base_link camera_frame
+```
+
 ## References
 
 https://docs.ros.org/en/jazzy/p/camera_calibration/doc/tutorial_stereo.html
