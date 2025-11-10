@@ -24,22 +24,22 @@ class StereoSplitNode(Node):
             self.image_callback,
             1)
         self.left_image_publisher = \
-                self.create_publisher(Image, "/stereo/left/image_raw", 1)
+                self.create_publisher(Image, "/left/image_raw", 1)
         self.right_image_publisher = \
-                self.create_publisher(Image, "/stereo/right/image_raw", 1)
+                self.create_publisher(Image, "/right/image_raw", 1)
         self.left_cam_info_publisher = \
-                self.create_publisher(CameraInfo, "/stereo/left/camera_info", 1)
+                self.create_publisher(CameraInfo, "/left/camera_info", 1)
         self.right_cam_info_publisher = \
-                self.create_publisher(CameraInfo, "/stereo/right/camera_info", 1)
+                self.create_publisher(CameraInfo, "/right/camera_info", 1)
         self.bridge = CvBridge()
         self.left_ci = CameraInfoManager(self,
             url=self.get_parameter('left_camera_info_url'). \
                 get_parameter_value().string_value,
-            namespace="/stereo/left")
+            namespace="/left_camera")
         self.right_ci = CameraInfoManager(self,
             url=self.get_parameter('right_camera_info_url'). \
                 get_parameter_value().string_value,
-            namespace="/stereo/right")
+            namespace="/right_camera")
         self.left_ci.loadCameraInfo()
         self.right_ci.loadCameraInfo()
 
