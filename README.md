@@ -1,21 +1,29 @@
 ## Not ready for release
 
+# ROS2 Stereo Camera Demonstration
 
-Python stereo split launch:
+## Stereo Split Node
+
+The camera used in this demonstration provides the stereo image as a single image where the right camera image is appended to the left camera image.
+The stereo split node splits this single image into two seperate images, publishing on left/image_raw and right/image_raw. Additionally it supports the set_camera_info service on /left_camera/set_camera_info and /right_camera/set_camera_info. It publishes camera calibration information on /left/camera_info and /right/camera_info.
+
+To launch:
 ```
 ros2 run stereo_demo stereo_split_node --ros-args --remap /image:=/server/image -p left_camera_info_url:=file:///root/ros2_ws/calration/left.yaml -p right_camera_info_url:=file:///root/ros2_ws/calibration/right.yaml
 ```
 
-To calibrate:
+## Calibration
+
 ```
 ros2 run camera_calibration cameracalibrator --approximate 0.1 --size 8x6 --square 0.108 --ros-args -r right:=/right/image_raw -r left:=/left/image_raw
 ```
 
-To launch stereo:
+## Launch Stereo Processing
 ```
 ros2 launch stereo_image_proc stereo_image_proc.launch.py
 ```
 
+## View Stereo Disparity Map
 To view depth disparity map:
 ```
 ros2 run image_view disparity_view --ros-args -r /image:=/disparity
