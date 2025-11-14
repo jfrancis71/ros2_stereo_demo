@@ -48,7 +48,7 @@ source ./install/setup.bash
 This package also uses the ROS2 Python CameraInfoManager package (this manages the SetCameraInfo service). Unfortunately the implementation on the official Jazzy looks incorrect. For the moment I suggest use the following repository:
 
 ```
-git -C src clone https://github.com/furbrain/image_common/tree/rolling
+git -C src clone https://github.com/furbrain/image_common
 colcon build --symlink-install --packages-select=camera_info_manager_py
 source ./install/setup.bash
 ```
