@@ -4,21 +4,63 @@
 
 ## Overview
 
-In this demonstration I show how to setup a stereo camera so it is publishing the correct topics. I show how to calibrate the camera. I then show how to view the disparity map. Then I show how to view the PointCloud in rviz2 and finally, for those of you using NAV2 mapping, how to place this PointCloud correctly in your map (in rviz2).
+In this demonstration I show how to:
+
+- Setup a stereo camera so it is publishing the correct topics
+- Calibrate the camera
+- View the disparity map
+- View the PointCloud in rviz2
+- View the PointCloud in rviz2 orientated within a NAV2 map (this is for those of you who are running NAV2)
+
+## Test Environment
+
+Tested on ROS2 Jazzy on the Desktop.
+Robot is a Raspberry Pi 3B+ (lego robot), running Ubuntu 22.04 with ROS2 Jazzy.
+
+The robot stereo camera is "ELP-USB3D1080P02-H120-DE 1080P 60FPS USB Webcam Dual 120 degree No Distortion Lens Synchronization Stereo Camera Module UVC USB 2.0"
+
+## Prerequisite Packages
+
+You should use the appropriate procedure for whatever is your preferred ROS2 setup. I don't cover that here as everyone has a different preferred install, eg. system-wide, build from source, docker etc...
+
+You will need to have installed the following packages:
+
+ros-jazzy-camera-calibration
+
+ros-jazzy-stereo-image-proc
+
+ros-jazzy-image-view
 
 ## Stereo Split Node
 
 This node is only needed when your camera provides the stereo image as a single image with the two camera images side by side. This node will split that single image down the middle with the left side and right side published on seperate topics (see published topics below). This node also supports publishing on the CameraInfo topic. If your camera driver already does this, you will not need this node.
 
-To launch:
+### Install
+
+```
+git -C src clone https://github.com/jfrancis71/ros2_stereo_demo
+colcon build --symlink-install --packages-select=stereo_split_node
+source ./install/setup.bash
+```
+
+This package also uses the ROS2 Python CameraInfoManager package (this manages the SetCameraInfo service). Unfortunately the implementation on the official Jazzy looks incorrect. For the moment I suggest use the following repository:
+
+```
+git -C src clone https://github.com/furbrain/image_common/tree/rolling
+colcon build --symlink-install --packages-select=camera_info_manager_py
+source ./install/setup.bash
+```
+
+### Launch
+
 ```
 ros2 run stereo_demo stereo_split_node --ros-args \
     --remap /image:=/server/image \
-    -p left_camera_info_url:=file:///root/ros2_ws/calibration/left.yaml \
-    -p right_camera_info_url:=file:///root/ros2_ws/calibration/right.yaml
+    -p left_camera_info_url:=file:///root/ros2_config/calibration/left.yaml \
+    -p right_camera_info_url:=file:///root/ros2_config/calibration/right.yaml
 ```
 
-In the above line I am setting the url's appropriately for my ROS2 install (I am using Docker). You will likely wish to use a location which persists to save you from needing to recalibrate.
+In the above line I am setting the url's appropriately for my ROS2 install (I am using Docker). You will likely wish to use a location which persists to save you from needing to recalibrate. My ros2_config folder above is a persistent docker volume.
 
 ### Subscribed Topics
 
@@ -43,7 +85,7 @@ In the above line I am setting the url's appropriately for my ROS2 install (I am
 
 ## Calibration
 
-In below you should check the size and square parameters, please see the camera calibration reference at bottom. Please pay extra attention to the size parameter in the documentation (it is a little confusing).
+In below you should check the size and square parameters, please see the camera calibration reference in the References section. Please pay extra attention to the size parameter in the documentation (it is a little confusing).
 
 ```
 ros2 run camera_calibration cameracalibrator --approximate 0.1 --size 8x6 --square 0.0177 \
