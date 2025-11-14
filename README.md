@@ -12,6 +12,8 @@ In this demonstration I show how to:
 - View the PointCloud in rviz2
 - View the PointCloud in rviz2 orientated within a NAV2 map (this is for those of you who are running NAV2)
 
+Out of scope: Setting up your robot, joystick controller, NAV2 stack. I assume you already have these setup.
+
 ## Test Environment
 
 Tested on ROS2 Jazzy on the Desktop.
