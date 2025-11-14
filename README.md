@@ -41,7 +41,7 @@ This node is only needed when your camera provides the stereo image as a single 
 
 ```
 git -C src clone https://github.com/jfrancis71/ros2_stereo_demo
-colcon build --symlink-install --packages-select=stereo_split_node
+colcon build --symlink-install --packages-select=stereo_demo
 source ./install/setup.bash
 ```
 
