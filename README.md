@@ -1,5 +1,3 @@
-## Not ready for release
-
 # ROS2 Stereo Camera Demonstration
 
 ## Overview
