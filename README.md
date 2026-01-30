@@ -94,6 +94,8 @@ ros2 run camera_calibration cameracalibrator --approximate 0.1 --size 8x6 --squa
 
 It is worth a little patience with this step as you will get much better results.
 
+The Calibrate button does the calibration, it will be lit green when it is ready. The Commit button will instruct the Camera Node to save the calibration (if your camera node supports it). The stereo_split_node in this repo does support this.
+
 ## Launch Stereo Processing
 ```
 ros2 launch stereo_image_proc stereo_image_proc.launch.py sgbm_mode:=2
