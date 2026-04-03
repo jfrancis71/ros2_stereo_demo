@@ -88,7 +88,7 @@ In the above line I am setting the url's appropriately for my ROS2 install (I am
 In below you should check the size and square parameters, please see the camera calibration reference in the References section. Please pay extra attention to the size parameter in the documentation (it is a little confusing).
 
 ```
-ros2 run camera_calibration cameracalibrator --approximate 0.1 --size 8x6 --square 0.0177 \
+ros2 run camera_calibration cameracalibrator --size 8x6 --square 0.0177 \
     --ros-args -r left:=/left/image_raw -r right:=/right/image_raw
 ```
 
