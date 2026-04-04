@@ -1,5 +1,11 @@
 # ROS2 Stereo Camera Demonstration
 
+## YouTube Tutorial
+
+<a href="https://www.youtube.com/watch?v=C9Iw-PxsYjY">
+    <img src="https://img.youtube.com/vi/C9Iw-PxsYjY/0.jpg" height=320>
+</a>
+
 ## Overview
 
 In this demonstration I show how to:
