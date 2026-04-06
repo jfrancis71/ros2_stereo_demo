@@ -3,14 +3,10 @@
 
 import rclpy
 from rclpy.node import Node
-from sensor_msgs.msg import Image
-from sensor_msgs.msg import CameraInfo
-from cv_bridge import CvBridge
-import cv2
-import numpy as np
-import yaml
+from sensor_msgs.msg import Image, CameraInfo
 from sensor_msgs.srv import SetCameraInfo
 from camera_info_manager import CameraInfoManager
+from cv_bridge import CvBridge
 
 
 class StereoSplitNode(Node):
